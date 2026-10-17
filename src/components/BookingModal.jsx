@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 
+const SERVICE_PRICING_GUIDE = {
+  'Standard Service': { price: '₹3,699', time: '3 - 4 Hours', warranty: '6 Months / 10,000 KM' },
+  'Basic Service': { price: '₹2,199', time: '2 Hours', warranty: '3 Months / 5,000 KM' },
+  'Comprehensive Service': { price: '₹5,999', time: '5 - 6 Hours', warranty: '1 Year Warranty' },
+  'Denting & Painting Booth': { price: '₹2,499 per panel', time: '24 - 48 Hours', warranty: 'Lifetime Gloss Warranty' },
+  '9H Ceramic & Detailing': { price: '₹9,999', time: '24 Hours', warranty: '3-Year Hydrophobic Shield' },
+  'Computerized Engine Scanning': { price: '₹499', time: '45 Mins', warranty: 'Digital Diagnostic Report' },
+  'Brake System Overhaul': { price: '₹1,899', time: '1.5 Hours', warranty: 'Stopping Safety Certified' },
+  'Car Air Conditioning Service': { price: '₹1,499', time: '1.5 Hours', warranty: 'Sub-Zero Cooling Guarantee' },
+  'Suspension & Steering Repair': { price: 'Inspection-based', time: '3 - 4 Hours', warranty: 'OEM Strut Warranty' },
+  '3D Wheel Alignment & Balancing': { price: '₹699', time: '45 Mins', warranty: 'Laser Accuracy Check' }
+};
+
 export default function BookingModal({ isOpen, onClose, initialService, quoteData, onShowToast }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    car: '',
+    carBrand: '',
+    carModel: '',
     service: 'Standard Service',
-    hub: 'Main Workshop (Village Rehta Mafi, Thana Dilari, Thakurdwara)',
+    hub: 'Village Rehta Mafi Main Workshop Hub (Moradabad)',
     date: '',
-    time: 'Morning (08:30 AM - 11:00 AM)',
+    time: 'Morning (08:30 AM - 11:30 AM)',
     doorstep: true,
     notes: ''
   });
@@ -19,17 +33,22 @@ export default function BookingModal({ isOpen, onClose, initialService, quoteDat
       setFormData(prev => ({ ...prev, service: initialService }));
     }
     if (quoteData) {
-      const addonsStr = quoteData.addons?.length ? ` | Add-ons: ${quoteData.addons.join(', ')}` : '';
       setFormData(prev => ({
         ...prev,
-        car: quoteData.segment || prev.car,
+        carModel: quoteData.segment || prev.carModel,
         service: quoteData.service || prev.service,
-        notes: `Selected Service: ${quoteData.service || ''}${addonsStr}`
+        notes: quoteData.addons?.length ? `Selected Add-ons: ${quoteData.addons.join(', ')}` : ''
       }));
     }
   }, [initialService, quoteData]);
 
   if (!isOpen) return null;
+
+  const currentPriceInfo = SERVICE_PRICING_GUIDE[formData.service] || {
+    price: 'Fair Estimate on Inspection',
+    time: '2 - 4 Hours',
+    warranty: 'Warranty Included'
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,28 +59,31 @@ export default function BookingModal({ isOpen, onClose, initialService, quoteDat
     }
 
     // Trigger celebratory confetti
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    } catch (_) {}
 
     const text = encodeURIComponent(
       `*New Service Appointment Booking - Multi Brand Car Service Center*\n\n` +
-      `👤 *Name:* ${formData.name}\n` +
-      `📱 *Phone:* ${formData.phone}\n` +
-      `🚗 *Vehicle:* ${formData.car || 'Not specified'}\n` +
-      `🔧 *Service:* ${formData.service}\n` +
+      `👤 *Customer Name:* ${formData.name}\n` +
+      `📱 *Mobile Phone:* ${formData.phone}\n` +
+      `🚗 *Vehicle:* ${formData.carBrand} ${formData.carModel || ''}\n` +
+      `🛠️ *Service Discipline:* ${formData.service} (Estimated: ${currentPriceInfo.price})\n` +
+      `🛡️ *Coverage:* ${currentPriceInfo.warranty}\n` +
       `📍 *Workshop Hub:* ${formData.hub}\n` +
-      `📅 *Date:* ${formData.date || 'Earliest available'}\n` +
+      `📅 *Preferred Date:* ${formData.date || 'Earliest Available'}\n` +
       `⏰ *Time Slot:* ${formData.time}\n` +
-      `🚚 *Pickup Requested:* ${formData.doorstep ? 'Yes (Doorstep Pickup & Drop)' : 'No (Direct Workshop Drop)'}\n` +
-      (formData.notes ? `📝 *Notes:* ${formData.notes}\n` : '') +
-      `\n_Direct Hotline: 90128 62412 (Village Rehta Mafi, Dilari, Thakurdwara, Moradabad)_`
+      `🚚 *Pickup Requested:* ${formData.doorstep ? 'Yes (Free Valet Pickup & Drop)' : 'No (Direct Self-Drop)'}\n` +
+      (formData.notes ? `📝 *Notes/Issues:* ${formData.notes}\n` : '') +
+      `\n📍 *Workshop Location:* Village Rehta Mafi, Thana Dilari, Tehsil Thakurdwara, Moradabad (Hotline: 90128 62412)`
     );
 
     if (onShowToast) {
-      onShowToast('Appointment Confirmed!', 'Connecting with Service Desk via WhatsApp...');
+      onShowToast('Appointment Confirmed!', 'Connecting with Service Desk on WhatsApp...');
     }
 
     onClose();
@@ -73,11 +95,12 @@ export default function BookingModal({ isOpen, onClose, initialService, quoteDat
     setFormData({
       name: '',
       phone: '',
-      car: '',
+      carBrand: '',
+      carModel: '',
       service: 'Standard Service',
-      hub: 'Village Rehta Mafi, Thana Dilari, Thakurdwara, Moradabad',
+      hub: 'Village Rehta Mafi Main Workshop Hub (Moradabad)',
       date: '',
-      time: 'Morning (08:30 AM - 11:00 AM)',
+      time: 'Morning (08:30 AM - 11:30 AM)',
       doorstep: true,
       notes: ''
     });
@@ -91,20 +114,35 @@ export default function BookingModal({ isOpen, onClose, initialService, quoteDat
         </button>
 
         <div className="modal-header">
-          <span className="badge-neon" style={{ marginBottom: '8px' }}>Online Service Booking</span>
-          <h2 className="modal-title">Schedule Your Car Service</h2>
-          <p className="modal-subtitle">Multi Brand Car Service Center • Moradabad (Hotline: 90128 62412)</p>
+          <span className="badge-neon" style={{ marginBottom: '8px' }}>
+            <span className="pulse-dot"></span>
+            <span>Online Booking Desk</span>
+          </span>
+          <h2 className="modal-title">Schedule Precision Service</h2>
+          <p className="modal-subtitle">Multi Brand Car Service Center • Moradabad (Direct Desk: 90128 62412)</p>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        {/* Live Service Price & Warranty Banner */}
+        <div className="modal-price-strip">
+          <div className="modal-price-meta">
+            <span className="modal-service-name">{formData.service}</span>
+            <span className="modal-service-price">{currentPriceInfo.price}</span>
+          </div>
+          <div className="modal-badge-group">
+            <span className="modal-pill"><i className="fa-solid fa-shield-halved"></i> {currentPriceInfo.warranty}</span>
+            <span className="modal-pill"><i className="fa-regular fa-clock"></i> Est. {currentPriceInfo.time}</span>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="modal-form-body">
           <div className="form-grid-2">
             <div className="form-group">
-              <label htmlFor="modal-name" className="form-label">Full Name *</label>
+              <label htmlFor="b-name" className="form-label">Full Name *</label>
               <input 
                 type="text" 
-                id="modal-name" 
+                id="b-name" 
                 className="form-input" 
-                placeholder="e.g. Ramesh Kumar"
+                placeholder="e.g. Rahul Sharma" 
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required 
@@ -112,138 +150,134 @@ export default function BookingModal({ isOpen, onClose, initialService, quoteDat
             </div>
 
             <div className="form-group">
-              <label htmlFor="modal-phone" className="form-label">Phone Number *</label>
+              <label htmlFor="b-phone" className="form-label">Phone Number *</label>
               <input 
                 type="tel" 
-                id="modal-phone" 
+                id="b-phone" 
                 className="form-input" 
-                placeholder="10-digit mobile number"
+                placeholder="10-digit mobile number" 
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required 
-                pattern="[0-9]{10}" 
               />
             </div>
           </div>
 
-          <div className="form-grid-2" style={{ marginTop: '14px' }}>
+          <div className="form-grid-2">
             <div className="form-group">
-              <label htmlFor="modal-car" className="form-label">Car Model & Fuel Type</label>
+              <label htmlFor="b-brand" className="form-label">Car Manufacturer</label>
+              <select 
+                id="b-brand" 
+                className="form-select"
+                value={formData.carBrand}
+                onChange={(e) => setFormData({ ...formData, carBrand: e.target.value })}
+              >
+                <option value="">Select Brand</option>
+                <option value="Maruti Suzuki">Maruti Suzuki</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Tata Motors">Tata Motors</option>
+                <option value="Mahindra">Mahindra</option>
+                <option value="Honda">Honda</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Kia">Kia</option>
+                <option value="Volkswagen / Skoda">Volkswagen / Skoda</option>
+                <option value="Luxury (BMW / Audi / Benz)">Luxury (BMW / Audi / Benz)</option>
+                <option value="Other Brand">Other Brand</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="b-model" className="form-label">Car Model & Year</label>
               <input 
                 type="text" 
-                id="modal-car" 
+                id="b-model" 
                 className="form-input" 
-                placeholder="e.g. Honda City Petrol or Creta Diesel"
-                value={formData.car}
-                onChange={(e) => setFormData({ ...formData, car: e.target.value })}
+                placeholder="e.g. Swift 2022 / Scorpio" 
+                value={formData.carModel}
+                onChange={(e) => setFormData({ ...formData, carModel: e.target.value })}
               />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="modal-service-select" className="form-label">Service Package *</label>
-              <select 
-                id="modal-service-select" 
-                className="form-select"
-                value={formData.service}
-                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                required
-              >
-                <option value="Standard Service">Standard Periodic Service (Most Popular)</option>
-                <option value="Basic Service">Basic Periodic Service</option>
-                <option value="Comprehensive Car Service">Comprehensive 60-Point Service</option>
-                <option value="Car Full Body Dent Paint">Car Full Body Dent & Paint Booth</option>
-                <option value="Panel Dent Paint">Individual Panel Scratch / Dent Paint</option>
-                <option value="Premium Ceramic Coating">9H / 10H Ceramic Coating Studio</option>
-                <option value="PPF Paint Protection Film">TPU Paint Protection Film (PPF)</option>
-                <option value="Premium Car Interior Detailing">Deep Interior Steam Spa</option>
-                <option value="OBD-II Computer Engine Scanning">OBD-II Computer Engine Scanning</option>
-                <option value="Front Shock Absorber Replacement">Suspension & Shock Absorber Repair</option>
-                <option value="Car Clutch Set Replacement">Clutch Plate & Flywheel Repair</option>
-                <option value="Car Regular AC Service">Car AC Cooling & Gas Recharge</option>
-                <option value="Car Battery Replacement">Battery Replacement & Doorstep Fit</option>
-                <option value="Second Hand Car Inspection">120-Point Pre-Purchase Car Inspection</option>
-              </select>
             </div>
           </div>
 
-          <div className="form-grid-2" style={{ marginTop: '14px' }}>
-            <div className="form-group">
-              <label htmlFor="modal-hub-select" className="form-label">Preferred Workshop Hub</label>
-              <select 
-                id="modal-hub-select" 
-                className="form-select"
-                value={formData.hub}
-                onChange={(e) => setFormData({ ...formData, hub: e.target.value })}
-              >
-                <option value="Main Workshop (Village Rehta Mafi, Thana Dilari, Thakurdwara)">Main Workshop (Village Rehta Mafi, Thana Dilari, Thakurdwara)</option>
-                <option value="Doorstep Pickup in Thakurdwara / Dilari">Doorstep Pickup in Thakurdwara / Dilari</option>
-                <option value="Doorstep Pickup in Moradabad City & Bypass">Doorstep Pickup in Moradabad City & Bypass</option>
-                <option value="Doorstep Pickup along Kashipur / Surjan Nagar Belt">Doorstep Pickup along Kashipur / Surjan Nagar Belt</option>
-              </select>
-            </div>
+          <div className="form-group">
+            <label htmlFor="b-service" className="form-label">Selected Service Package</label>
+            <select 
+              id="b-service" 
+              className="form-select"
+              value={formData.service}
+              onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+            >
+              <option value="Standard Service">Standard Periodic Service (100% Synthetic Oil + OBD-II Scan)</option>
+              <option value="Basic Service">Basic Periodic Service (Oil Change + Fluid Top-up)</option>
+              <option value="Comprehensive Service">Comprehensive 60-Point Care (Complete Renewal)</option>
+              <option value="Denting & Painting Booth">German Heated Paint Booth (Panel or Full Body)</option>
+              <option value="9H Ceramic & Detailing">9H Ceramic Coating & TPU PPF Shield</option>
+              <option value="Computerized Engine Scanning">Computerized Engine & Electrical Diagnostic Scan</option>
+              <option value="Brake System Overhaul">Brake Pads & Rotor Disc Machining</option>
+              <option value="Car Air Conditioning Service">Car Air Conditioning Recovery & Gas Refill</option>
+              <option value="Suspension & Steering Repair">Suspension Overhaul & Shock Absorbers</option>
+              <option value="3D Wheel Alignment & Balancing">3D Laser Wheel Alignment & Balancing</option>
+            </select>
+          </div>
 
+          <div className="form-grid-2">
             <div className="form-group">
-              <label htmlFor="modal-date" className="form-label">Preferred Date</label>
+              <label htmlFor="b-date" className="form-label">Preferred Date</label>
               <input 
                 type="date" 
-                id="modal-date" 
-                className="form-input"
+                id="b-date" 
+                className="form-input" 
                 value={formData.date}
-                onChange={(e) => setFormData({ ...formData, date: e.target.value })} 
+                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
               />
             </div>
-          </div>
 
-          <div className="form-grid-2" style={{ marginTop: '14px' }}>
             <div className="form-group">
-              <label htmlFor="modal-time" className="form-label">Time Slot</label>
+              <label htmlFor="b-time" className="form-label">Preferred Time Slot</label>
               <select 
-                id="modal-time" 
+                id="b-time" 
                 className="form-select"
                 value={formData.time}
                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
               >
-                <option value="Morning (08:30 AM - 11:00 AM)">Morning (08:30 AM - 11:00 AM) [Recommended]</option>
-                <option value="Afternoon (11:00 AM - 02:00 PM)">Afternoon (11:00 AM - 02:00 PM)</option>
-                <option value="Evening (02:00 PM - 06:00 PM)">Evening (02:00 PM - 06:00 PM)</option>
+                <option value="Morning (08:30 AM - 11:30 AM)">Morning (08:30 AM - 11:30 AM)</option>
+                <option value="Afternoon (11:30 AM - 02:30 PM)">Afternoon (11:30 AM - 02:30 PM)</option>
+                <option value="Evening (02:30 PM - 06:30 PM)">Evening (02:30 PM - 06:30 PM)</option>
               </select>
-            </div>
-
-            <div className="form-group" style={{ justifyContent: 'center' }}>
-              <label className="form-label">Doorstep Pickup</label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '0.9rem', marginTop: '8px' }}>
-                <input 
-                  type="checkbox" 
-                  checked={formData.doorstep}
-                  onChange={(e) => setFormData({ ...formData, doorstep: e.target.checked })}
-                  style={{ width: '20px', height: '20px', accentColor: 'var(--accent-blue)' }} 
-                />
-                <span>Yes, arrange doorstep pickup across Moradabad / Thakurdwara</span>
-              </label>
             </div>
           </div>
 
-          <div className="form-group" style={{ marginTop: '14px' }}>
-            <label htmlFor="modal-notes" className="form-label">Specific Symptoms or Notes (Optional)</label>
+          {/* Doorstep Valet Pickup Toggle */}
+          <div className="form-group" style={{ margin: '14px 0' }}>
+            <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+              <input 
+                type="checkbox" 
+                checked={formData.doorstep} 
+                onChange={(e) => setFormData({ ...formData, doorstep: e.target.checked })}
+                style={{ width: '18px', height: '18px', accentColor: 'var(--accent-red)' }}
+              />
+              <span style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>
+                <strong>Request Free Doorstep Pickup & Drop</strong> (Available in Thakurdwara, Dilari, Moradabad)
+              </span>
+            </label>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="b-notes" className="form-label">Specific Car Issues or Notes (Optional)</label>
             <textarea 
-              id="modal-notes" 
-              className="form-textarea" 
-              rows={2} 
-              placeholder="e.g. AC cooling feels weak, mild brake squeal, scratch on left door..."
+              id="b-notes" 
+              className="form-input" 
+              rows="2"
+              placeholder="e.g. Squeaking noise when braking, AC not cooling fast, dent on left fender..."
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
             ></textarea>
           </div>
 
-          <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }}>
-              <i className="fa-brands fa-whatsapp"></i>
-              <span>Confirm & Connect on WhatsApp</span>
-            </button>
-            <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-              🔒 Your details are safe with us. No spam. A service advisor will confirm slot within 10 minutes.
-            </p>
-          </div>
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '10px' }}>
+            <i className="fa-brands fa-whatsapp"></i>
+            <span>Confirm Booking via WhatsApp (90128 62412)</span>
+          </button>
         </form>
       </div>
     </div>

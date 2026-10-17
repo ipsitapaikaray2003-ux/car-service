@@ -26,7 +26,7 @@ export default function Hero({ onOpenBooking }) {
 
   return (
     <section className="hero-cinematic" id="home">
-      {/* 100% Clear Video Layer */}
+      {/* Cinematic Fullscreen Video Layer */}
       <div className="hero-video-wrapper">
         <video 
           ref={videoRef}
@@ -40,11 +40,72 @@ export default function Hero({ onOpenBooking }) {
           <source src="/car service.mp4" type="video/mp4" />
         </video>
 
-        {/* Minimal top and bottom edge framing only, keeping the video completely clear */}
-        <div className="hero-video-vignette"></div>
+        {/* Cinematic dark glass gradient vignette overlay */}
+        <div className="hero-cinematic-overlay"></div>
       </div>
 
-      {/* Minimal unobtrusive corner media controls only */}
+      {/* Hero Content Layer */}
+      <div className="container hero-content-container">
+        <div className="hero-text-content">
+          <div className="hero-status-pill">
+            <span className="hero-pulse-dot"></span>
+            <span className="hero-status-text">Next-Gen Multi-Brand Automotive Center • Moradabad</span>
+          </div>
+
+          <h1 className="hero-headline">
+            PRECISION AUTOMOTIVE <br />
+            <span className="hero-headline-accent">ENGINEERING & CARE</span>
+          </h1>
+
+          <p className="hero-subtext">
+            Experience dealership-level precision at our modern workshop in Village Rehta Mafi, Moradabad. 
+            Featuring computerized OBD-II diagnostics, German heated paint booth, and 9H ceramic detailing.
+          </p>
+
+          <div className="hero-cta-wrapper">
+            <button 
+              type="button" 
+              className="btn btn-primary btn-hero-primary"
+              onClick={() => onOpenBooking('Standard Service')}
+              id="hero-book-btn"
+            >
+              <i className="fa-regular fa-calendar-check"></i>
+              <span>Book a Service</span>
+            </button>
+
+            <a 
+              href="tel:9012862412" 
+              className="btn btn-glass btn-hero-secondary"
+              id="hero-call-btn"
+            >
+              <i className="fa-solid fa-phone"></i>
+              <span>Call 90128 62412</span>
+            </a>
+          </div>
+
+          {/* Animated Stats Ticker Strip */}
+          <div className="hero-stats-grid">
+            <div className="hero-stat-card">
+              <span className="hero-stat-value">12,500+</span>
+              <span className="hero-stat-label">Cars Serviced</span>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-value">15+</span>
+              <span className="hero-stat-label">Years Experience</span>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-value">99.4%</span>
+              <span className="hero-stat-label">Customer Satisfaction</span>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-value">4.9 ★</span>
+              <span className="hero-stat-label">Google Rated Hub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Unobtrusive corner media controls */}
       <div className="hero-corner-controls">
         <button 
           type="button" 

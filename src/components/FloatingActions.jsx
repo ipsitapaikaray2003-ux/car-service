@@ -35,7 +35,7 @@ export default function FloatingActions() {
       )}
 
       <a 
-        href="https://wa.me/919012862412?text=Hello%20Multi%20Brand%20Car%20Service%20Center,%20I%20would%20like%20to%20book%20a%20car%20service%20in%20Bangalore." 
+        href="https://wa.me/919012862412?text=Hello%20Multi%20Brand%20Car%20Service%20Center,%20I%20would%20like%20to%20book%20a%20car%20service%20in%20Moradabad." 
         target="_blank" 
         rel="noopener noreferrer" 
         className="floating-btn floating-whatsapp" 
