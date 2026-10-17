@@ -4031,4 +4031,173 @@ button, input, select, textarea {
   box-shadow: 0 4px 18px rgba(239, 68, 68, 0.2) !important;
 }
 
+/* ==========================================================================
+   ALTERNATING WHITE & ROYAL BLUE SECTION BACKGROUNDS
+   Sequence: White (Quick Estimate) -> Blue (Departments) -> White (Packages) 
+   -> Blue (Steps) -> White (Restoration) -> Blue (Why Us) -> White (Workflow) 
+   -> Blue (Locations) -> White (Testimonials) -> Blue (FAQ)
+   ========================================================================== */
+
+/* 1. SOLID PLAIN WHITE SECTIONS */
+.quick-estimate-section,
+#packages,
+#restoration,
+#workflow,
+.testimonials-section {
+  background: #ffffff !important;
+  color: var(--text-primary);
+  border-top: 1.5px solid rgba(37, 99, 235, 0.1);
+  border-bottom: 1.5px solid rgba(37, 99, 235, 0.1);
+  position: relative;
+}
+
+.quick-estimate-section .section-title,
+#packages .section-title,
+#restoration .section-title,
+#workflow .section-title,
+.testimonials-section .section-title {
+  color: #0f172a !important;
+}
+
+.quick-estimate-section .section-desc,
+#packages .section-desc,
+#restoration .section-desc,
+#workflow .section-desc,
+.testimonials-section .section-desc {
+  color: #334155 !important;
+}
+
+/* 2. ROYAL MOTORSPORT BLUE SECTIONS */
+#departments,
+#service-steps,
+#why-us,
+#locations,
+#faq {
+  background: linear-gradient(180deg, #09173b 0%, #0d2259 100%) !important;
+  color: #f8fafc;
+  position: relative;
+  border-top: 2px solid rgba(37, 99, 235, 0.35);
+  border-bottom: 2px solid rgba(37, 99, 235, 0.35);
+}
+
+/* Titles & Descriptions on Blue Sections */
+#departments .section-title,
+#service-steps .section-title,
+#why-us .section-title,
+#locations .section-title,
+#faq .section-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+#departments .section-desc,
+#service-steps .section-desc,
+#why-us .section-desc,
+#locations .section-desc,
+#faq .section-desc {
+  color: #cbd5e1 !important;
+}
+
+#departments .section-tag,
+#service-steps .section-tag,
+#why-us .section-tag,
+#locations .section-tag,
+#faq .section-tag {
+  color: #93c5fd !important;
+  background: rgba(37, 99, 235, 0.3) !important;
+  border: 1px solid rgba(147, 197, 253, 0.4) !important;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.25);
+}
+
+/* Crisp White High-Contrast Cards on Blue Sections */
+#departments .service-card,
+#service-steps .active-step-spotlight,
+#service-steps .step-gallery-card,
+#why-us .why-card,
+#locations .workshop-info-card,
+#locations .workshop-map-container,
+#faq .faq-item {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25), 0 0 20px rgba(37, 99, 235, 0.15) !important;
+}
+
+#why-us .why-card:hover,
+#departments .service-card:hover,
+#faq .faq-item:hover,
+#service-steps .step-gallery-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.35), 0 0 25px rgba(239, 68, 68, 0.25) !important;
+}
+
+/* Card Heading Text inside Blue Sections */
+#departments .service-card-title,
+#service-steps .active-step-title,
+#service-steps .step-card-title,
+#why-us .why-card h3,
+#locations .workshop-main-title,
+#faq .faq-question span {
+  color: #0f172a !important;
+}
+
+#departments .service-card-desc,
+#service-steps .active-step-desc,
+#why-us .why-card p,
+#locations .detail-value,
+#faq .faq-answer {
+  color: #334155 !important;
+}
+
+/* Department Search Box & Pills on Blue Section */
+#departments .service-search-box {
+  background: #ffffff;
+  border: 2px solid rgba(147, 197, 253, 0.5);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+#departments .service-search-input {
+  color: #0f172a;
+}
+
+#departments .service-search-input::placeholder {
+  color: #64748b;
+}
+
+#departments .dept-pill-btn {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #f1f5f9;
+}
+
+#departments .dept-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+#departments .dept-pill-btn.active {
+  background: #ffffff;
+  color: #1d4ed8;
+  border-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Workshop Promise Banner inside Service Steps on Blue Section */
+#service-steps .workshop-promise-banner {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(37, 99, 235, 0.2) !important;
+  color: #0f172a !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+#service-steps .promise-content h4 {
+  color: #0f172a !important;
+}
+
+#service-steps .promise-content p {
+  color: #334155 !important;
+}
+
+
 
