@@ -211,12 +211,12 @@ export default function BookingModal({ isOpen, onClose, initialService, quoteDat
 
             <div className="form-group" style={{ justifyContent: 'center' }}>
               <label className="form-label">Doorstep Pickup</label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', color: '#fff', fontSize: '0.9rem', marginTop: '8px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', color: 'var(--text-primary)', fontSize: '0.9rem', marginTop: '8px' }}>
                 <input 
                   type="checkbox" 
                   checked={formData.doorstep}
                   onChange={(e) => setFormData({ ...formData, doorstep: e.target.checked })}
-                  style={{ width: '20px', height: '20px', accentColor: 'var(--accent-gold)' }} 
+                  style={{ width: '20px', height: '20px', accentColor: 'var(--accent-blue)' }} 
                 />
                 <span>Yes, arrange doorstep pickup across Moradabad / Thakurdwara</span>
               </label>

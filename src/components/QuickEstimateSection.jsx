@@ -58,7 +58,7 @@ export default function QuickEstimateSection({ onOpenBooking, onShowToast }) {
               </span>
             </div>
 
-            <h3 style={{ fontSize: '1.8rem', color: '#fff', marginBottom: '14px', lineHeight: 1.25 }}>
+            <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '14px', lineHeight: 1.25 }}>
               Expert Attention Tailored to Every Make & Model
             </h3>
 
@@ -70,25 +70,25 @@ export default function QuickEstimateSection({ onOpenBooking, onShowToast }) {
               <div className="hero-check-item">
                 <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong style={{ color: '#fff' }}>Free Doorstep Pickup & Drop:</strong> Available across Thakurdwara, Dilari, Rehta Mafi, Moradabad, Kashipur Road & nearby belts.
+                  <strong style={{ color: 'var(--text-primary)' }}>Free Doorstep Pickup & Drop:</strong> Available across Thakurdwara, Dilari, Rehta Mafi, Moradabad, Kashipur Road & nearby belts.
                 </div>
               </div>
               <div className="hero-check-item">
                 <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong style={{ color: '#fff' }}>6-Month / 10,000 KM Warranty:</strong> Genuine peace of mind on all mechanical repairs and spare parts.
+                  <strong style={{ color: 'var(--text-primary)' }}>6-Month / 10,000 KM Warranty:</strong> Genuine peace of mind on all mechanical repairs and spare parts.
                 </div>
               </div>
               <div className="hero-check-item">
                 <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong style={{ color: '#fff' }}>100% Genuine OEM / OES Spares:</strong> Shell, Mobil 1, Bosch, Valeo, Brembo, and certified parts.
+                  <strong style={{ color: 'var(--text-primary)' }}>100% Genuine OEM / OES Spares:</strong> Shell, Mobil 1, Bosch, Valeo, Brembo, and certified parts.
                 </div>
               </div>
               <div className="hero-check-item">
                 <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong style={{ color: '#fff' }}>Live WhatsApp Video Reports:</strong> Complete digital transparency before any parts are replaced.
+                  <strong style={{ color: 'var(--text-primary)' }}>Live WhatsApp Video Reports:</strong> Complete digital transparency before any parts are replaced.
                 </div>
               </div>
             </div>

@@ -397,7 +397,7 @@ export default function Departments({ activeDept, onSelectDept, onOpenBooking })
     : currentDept.services;
 
   return (
-    <section className="section" id="departments" style={{ background: '#08090c' }}>
+    <section className="section" id="departments">
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Specialized Workshop Divisions</span>

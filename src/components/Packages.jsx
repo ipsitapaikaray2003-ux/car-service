@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Packages({ onOpenBooking }) {
   return (
-    <section className="section" id="packages" style={{ background: '#08090c' }}>
+    <section className="section" id="packages">
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Periodic Service Tiers</span>

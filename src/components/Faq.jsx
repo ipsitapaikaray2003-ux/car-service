@@ -31,7 +31,7 @@ export default function Faq() {
   };
 
   return (
-    <section className="section" id="faq" style={{ background: '#08090c' }}>
+    <section className="section" id="faq">
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Got Questions?</span>

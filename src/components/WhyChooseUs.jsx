@@ -35,7 +35,7 @@ const WHY_CARDS = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="section" id="why-us" style={{ background: '#08090c' }}>
+    <section className="section" id="why-us">
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Precision Service Advantage</span>
