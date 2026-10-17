@@ -12,7 +12,6 @@ import Workflow from './components/Workflow';
 import Locations from './components/Locations';
 import Testimonials from './components/Testimonials';
 import Faq from './components/Faq';
-import EmergencyBanner from './components/EmergencyBanner';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import FloatingActions from './components/FloatingActions';
@@ -104,8 +103,6 @@ export default function App() {
       {/* FAQ Accordion */}
       <Faq />
 
-      {/* Emergency Roadside Assistance Callout */}
-      <EmergencyBanner />
 
       {/* Footer */}
       <Footer 
