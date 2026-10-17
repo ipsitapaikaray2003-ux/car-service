@@ -91,10 +91,23 @@ export default function Footer({ onOpenBooking }) {
 
         <div className="footer-bottom">
           <div>Copyright © 2026 Multi Brand Car Service Center. All rights reserved.</div>
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div className="footer-developer-credit">
+            <span>Developed by </span>
+            <a 
+              href="https://www.qubnixtechnology.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="developer-agency-link"
+            >
+              <i className="fa-solid fa-code"></i> Qubnix Technology
+            </a>
+          </div>
+          <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
             <span>Village Rehta Mafi, Moradabad, UP</span>
             <span>•</span>
-            <span>Direct Hotline: 90128 62412</span>
+            <a href="tel:9012862412" style={{ color: 'var(--accent-red)', fontWeight: 700, textDecoration: 'none' }}>
+              <i className="fa-solid fa-phone"></i> 90128 62412
+            </a>
           </div>
         </div>
       </div>

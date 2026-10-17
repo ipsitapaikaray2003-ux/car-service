@@ -461,7 +461,7 @@ export default function Departments({ activeDept, onSelectDept, onOpenBooking })
                 <div>
                   <div className="service-card-top">
                     <div className="service-icon-box">
-                      <i className="fa-solid fa-car-wrench"></i>
+                      <i className={`fa-solid ${DEPARTMENTS_DATA[service.deptKey || currentDeptKey]?.icon || 'fa-wrench'}`}></i>
                     </div>
                     <span className="service-feature-badge">
                       <i className="fa-solid fa-circle-check"></i> {service.badge}

@@ -1,52 +1,59 @@
 /* ==========================================================================
    MULTI BRAND CAR SERVICE CENTER - REACT DESIGN SYSTEM & CSS
-   Ultra-Premium Luxury Automotive Obsidian & Gold Theme
+   Luxury Motorsport Blue, White & Supercar Red Theme
    ========================================================================== */
 
 :root {
-  /* Color Palette - Deep Obsidian & Carbon Matrix */
-  --bg-deep: #08090c;
-  --bg-surface: #0e1017;
-  --bg-surface-elevated: #151822;
-  --bg-card: rgba(18, 21, 30, 0.75);
-  --bg-card-hover: rgba(26, 30, 44, 0.9);
-  --bg-glass: rgba(14, 16, 23, 0.72);
+  /* Color Palette - Deep Luxury Midnight Navy & Sapphire Glass */
+  --bg-deep: #070b14;
+  --bg-surface: #0c1322;
+  --bg-surface-elevated: #111a2e;
+  --bg-card: rgba(13, 20, 36, 0.78);
+  --bg-card-hover: rgba(20, 31, 56, 0.92);
+  --bg-glass: rgba(11, 17, 32, 0.82);
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(245, 158, 11, 0.35);
-  --border-accent: rgba(245, 158, 11, 0.65);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-glow: rgba(59, 130, 246, 0.4);
+  --border-accent: rgba(59, 130, 246, 0.7);
 
-  /* Brand Accents - Luxury Automotive Gold & Supercar Crimson (Matching Logo) */
+  /* Brand Accents - Luxury Motorsport Blue, Pure White & Supercar Red */
+  --accent-blue: #2563eb;
+  --accent-blue-light: #3b82f6;
+  --accent-blue-glow: rgba(37, 99, 235, 0.45);
+
+  --accent-white: #ffffff;
+  --accent-silver: #e2e8f0;
+
+  --accent-red: #ef4444;
+  --accent-red-hover: #dc2626;
+  --accent-red-glow: rgba(239, 68, 68, 0.45);
+  --accent-crimson: #ef4444;
+
   --accent-gold: #f59e0b;
   --accent-gold-light: #fbbf24;
-  --accent-gold-dark: #b45309;
-  --accent-crimson: #ff3b30;
-  --accent-crimson-hover: #ef4444;
   --amber-gold: #f59e0b;
-  --amber-glow: rgba(245, 158, 11, 0.45);
+  --amber-glow: rgba(245, 158, 11, 0.4);
 
-  /* Legacy variable aliases mapped to luxury gold & warm tones (No more pervasive blue) */
-  --neon-cyan: #f59e0b;
-  --neon-blue: #d97706;
-  --electric-blue: #fbbf24;
-  --neon-red: #ff3b30;
+  /* Legacy & Utility Aliases */
+  --neon-cyan: #3b82f6;
+  --neon-blue: #2563eb;
+  --electric-blue: #60a5fa;
+  --neon-red: #ef4444;
   --success-green: #10b981;
   --success-glow: rgba(16, 185, 129, 0.35);
 
   /* Typography Colors */
-  --text-primary: #f8fafc;
+  --text-primary: #ffffff;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --text-highlight: #e2e8f0;
+  --text-highlight: #f1f5f9;
 
   /* Glowing Shadows */
-  --glow-cyan-sm: 0 0 16px rgba(245, 158, 11, 0.3);
-  --glow-cyan-md: 0 0 32px rgba(245, 158, 11, 0.45);
-  --glow-cyan-lg: 0 0 60px rgba(245, 158, 11, 0.25);
-  --glow-amber: 0 0 25px rgba(245, 158, 11, 0.5);
-  --glow-gold: 0 0 30px rgba(245, 158, 11, 0.45);
-  --glow-crimson: 0 0 24px rgba(255, 59, 48, 0.5);
-  --glow-red: 0 0 25px rgba(255, 59, 48, 0.45);
+  --glow-blue: 0 0 25px rgba(37, 99, 235, 0.45);
+  --glow-blue-lg: 0 0 50px rgba(37, 99, 235, 0.35);
+  --glow-red: 0 0 25px rgba(239, 68, 68, 0.45);
+  --glow-white: 0 0 20px rgba(255, 255, 255, 0.35);
+  --glow-gold: 0 0 25px rgba(245, 158, 11, 0.4);
 
   /* Fonts */
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -90,7 +97,7 @@ body {
   position: relative;
 }
 
-/* Background Animated Grid & Ambient Aura */
+/* Background Animated Grid & Ambient Aura (Motorsport Blue, White & Supercar Red) */
 body::before {
   content: '';
   position: fixed;
@@ -99,12 +106,13 @@ body::before {
   width: 100vw;
   height: 100vh;
   background-image: 
-    radial-gradient(circle at 50% 10%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 90% 40%, rgba(255, 59, 48, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 10% 80%, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 85% 35%, rgba(239, 68, 68, 0.09) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 20% 90%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 54px 54px, 54px 54px;
   pointer-events: none;
   z-index: -1;
 }
@@ -1000,91 +1008,195 @@ button, input, select, textarea {
   margin-bottom: 40px;
 }
 
-.tab-btn {
-  padding: 10px 20px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition-fast);
+/* ==========================================================================
+   DEPARTMENT TABS & SEARCH (FIXED RESPONSIVE LAYOUT & ANIMATIONS)
+   ========================================================================== */
+.service-search-wrapper {
+  max-width: 650px;
+  margin: 0 auto 32px;
+  padding: 0 16px;
+}
+
+.service-search-bar {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.tab-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-color: rgba(245, 158, 11, 0.35);
-}
-
-.tab-btn.active {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.3) 100%);
-  border-color: var(--accent-gold);
-  color: #fff;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
-}
-
-.services-search-bar {
-  max-width: 480px;
-  margin: 0 auto 36px;
-  position: relative;
-}
-
-.services-search-input {
-  width: 100%;
-  padding: 12px 20px 12px 48px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  background: rgba(13, 20, 36, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.35);
   border-radius: var(--radius-full);
-  color: #fff;
-  font-size: 0.9375rem;
-  transition: var(--transition-fast);
+  padding: 4px 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(37, 99, 235, 0.15);
+  transition: all 0.3s ease;
 }
 
-.services-search-input:focus {
-  outline: none;
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+.service-search-bar:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(37, 99, 235, 0.4), 0 0 12px rgba(239, 68, 68, 0.25);
+  background: rgba(17, 26, 46, 0.95);
 }
 
-.search-icon-pos {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
+.search-icon {
+  color: #3b82f6;
   font-size: 1.1rem;
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 
+.service-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  padding: 12px 6px;
+  font-family: var(--font-body);
+}
+
+.service-search-input::placeholder {
+  color: #64748b;
+  font-size: 0.88rem;
+}
+
+.search-clear-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #94a3b8;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.search-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ffffff;
+}
+
+/* Department Tab Selector Navigation */
+.dept-tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 44px;
+  padding: 0 10px;
+}
+
+.dept-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 22px;
+  background: rgba(13, 20, 36, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.dept-tab-btn i {
+  font-size: 1rem;
+  color: #3b82f6;
+  transition: all 0.3s ease;
+}
+
+.dept-tab-btn:hover {
+  color: #ffffff;
+  background: rgba(20, 31, 56, 0.95);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);
+}
+
+.dept-tab-btn:hover i {
+  color: #ef4444;
+  transform: scale(1.15) rotate(5deg);
+}
+
+.dept-tab-btn.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.35) 0%, rgba(13, 20, 36, 0.95) 100%);
+  border-color: #3b82f6;
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.4), inset 0 0 15px rgba(37, 99, 235, 0.25);
+}
+
+.dept-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #ffffff, #ef4444);
+  border-radius: 2px;
+}
+
+.dept-tab-btn.active i {
+  color: #ffffff;
+  text-shadow: 0 0 10px #3b82f6;
+}
+
+/* ==========================================================================
+   SERVICES CARDS GRID & ANIMATED BOXES
+   ========================================================================== */
 .services-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 24px;
 }
 
+/* Service Card with Animated Colors */
 .service-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: linear-gradient(165deg, rgba(13, 20, 36, 0.85) 0%, rgba(9, 14, 26, 0.96) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.22);
   border-radius: var(--radius-md);
   padding: 26px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 18px;
-  transition: var(--transition-smooth);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Animated Racing Tricolor Top Accent Line */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #ffffff, #ef4444, #2563eb);
+  background-size: 300% 100%;
+  animation: tricolorShift 6s linear infinite;
+  opacity: 0.9;
 }
 
 .service-card:hover {
-  border-color: var(--accent-gold);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 18px rgba(245, 158, 11, 0.2);
-  transform: translateY(-5px);
-  background: var(--bg-card-hover);
+  border-color: rgba(59, 130, 246, 0.65);
+  transform: translateY(-6px);
+  background: linear-gradient(165deg, rgba(20, 31, 56, 0.94) 0%, rgba(13, 20, 36, 0.98) 100%);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 28px rgba(37, 99, 235, 0.3), 0 0 15px rgba(239, 68, 68, 0.2);
 }
 
 .service-card-top {
@@ -1094,41 +1206,50 @@ button, input, select, textarea {
   gap: 16px;
 }
 
+/* Service Icon Box with Animated Hover Pulse */
 .service-icon-box {
   width: 52px;
   height: 52px;
   border-radius: var(--radius-sm);
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(239, 68, 68, 0.16));
+  border: 1px solid rgba(59, 130, 246, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-gold);
-  font-size: 1.5rem;
+  color: #60a5fa;
+  font-size: 1.45rem;
   flex-shrink: 0;
-  transition: var(--transition-fast);
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
 }
 
 .service-card:hover .service-icon-box {
-  background: var(--accent-gold);
-  color: #08090c;
-  box-shadow: 0 0 20px var(--accent-gold);
+  background: linear-gradient(135deg, #2563eb, #ef4444);
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(37, 99, 235, 0.6), 0 0 14px rgba(239, 68, 68, 0.5);
+  transform: scale(1.08) rotate(4deg);
 }
 
+/* Feature Badge (Blue, White, Red Frosting) */
 .service-price-tag,
 .service-feature-badge {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--amber-gold);
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  padding: 5px 12px;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(239, 68, 68, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 5px 13px;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.service-feature-badge i {
+  color: #3b82f6;
 }
 
 .service-card-body h3 {
@@ -3636,4 +3757,223 @@ button, input, select, textarea {
     font-size: 1.3rem;
   }
 }
+
+/* ==========================================================================
+   FOOTER DEVELOPER CREDIT (QUBNIX TECHNOLOGY)
+   ========================================================================== */
+.footer-developer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.developer-agency-link {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(90deg, #3b82f6, #ffffff, #ef4444);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1.5px solid rgba(59, 130, 246, 0.5);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+  animation: tricolorShift 4s linear infinite;
+}
+
+.developer-agency-link:hover {
+  border-bottom-color: #ef4444;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
+}
+
+.developer-agency-link i {
+  -webkit-text-fill-color: initial;
+  color: #3b82f6;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   ANIMATED BOX COLORS & MOTORSPORT BLUE-WHITE-RED CARD GLOWS
+   ========================================================================== */
+
+/* Shifting animated gradient for borders and stripes */
+@keyframes tricolorShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Dynamic box breathing animation between royal blue and racing red */
+@keyframes boxBreatheGlow {
+  0% {
+    border-color: rgba(37, 99, 235, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(37, 99, 235, 0.18);
+  }
+  50% {
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 22px rgba(239, 68, 68, 0.22);
+  }
+  100% {
+    border-color: rgba(37, 99, 235, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(37, 99, 235, 0.18);
+  }
+}
+
+/* Package Cards with Tricolor Accents and Animated Glow */
+.package-card {
+  background: linear-gradient(165deg, rgba(13, 20, 36, 0.85) 0%, rgba(8, 12, 22, 0.98) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.25) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.package-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #ffffff, #ef4444, #2563eb);
+  background-size: 300% 100%;
+  animation: tricolorShift 5s linear infinite;
+}
+
+.package-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: rgba(59, 130, 246, 0.7) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(37, 99, 235, 0.35), 0 0 15px rgba(239, 68, 68, 0.2) !important;
+}
+
+.package-card.featured {
+  border-color: rgba(239, 68, 68, 0.5) !important;
+  animation: boxBreatheGlow 4s ease-in-out infinite;
+}
+
+.package-ribbon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Active Step Spotlight with Animated Glow */
+.active-step-spotlight {
+  background: linear-gradient(165deg, rgba(13, 20, 36, 0.92) 0%, rgba(8, 12, 22, 0.98) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+  animation: boxBreatheGlow 5s ease-in-out infinite;
+}
+
+.active-step-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #ffffff, #ef4444, #2563eb);
+  background-size: 300% 100%;
+  animation: tricolorShift 4s linear infinite;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Step Gallery Cards with Animated Hover */
+.step-gallery-card {
+  background: linear-gradient(165deg, rgba(13, 20, 36, 0.8) 0%, rgba(9, 14, 26, 0.95) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-gallery-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #ffffff, #ef4444);
+  opacity: 0.7;
+}
+
+.step-gallery-card:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  border-color: rgba(59, 130, 246, 0.6) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Step Workflow Card Hover */
+.step-card {
+  background: linear-gradient(165deg, rgba(13, 20, 36, 0.85) 0%, rgba(9, 14, 26, 0.96) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #ffffff, #ef4444);
+}
+
+.step-card:hover {
+  border-color: rgba(239, 68, 68, 0.5) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 68, 68, 0.25) !important;
+}
+
+.step-number-bubble {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* Button Primary (Blue to Red Animated Hover) */
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 6px 25px rgba(239, 68, 68, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Button Outline (Blue border to white/red hover) */
+.btn-outline {
+  border: 1px solid rgba(59, 130, 246, 0.5) !important;
+  color: #ffffff !important;
+  background: rgba(13, 20, 36, 0.6) !important;
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline:hover {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3) !important;
+}
+
 
