@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Topbar from './components/Topbar';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import QuickEstimateSection from './components/QuickEstimateSection';
@@ -50,10 +49,7 @@ export default function App() {
 
   return (
     <div className="app-root">
-      {/* Top Info Bar */}
-      <Topbar />
-
-      {/* Main Navbar - Logo Only, no text */}
+      {/* Main Navbar - Logo Only, Transparent & Premium */}
       <Navbar 
         onOpenBooking={handleOpenBooking} 
         onSelectDepartment={handleSelectDepartment}

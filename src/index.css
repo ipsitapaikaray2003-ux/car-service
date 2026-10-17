@@ -2948,31 +2948,46 @@ button, input, select, textarea {
   pointer-events: none;
 }
 
-.hero-cinematic-dock {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-}
-
-.hero-floating-glass-bar {
-  background: rgba(10, 12, 18, 0.72);
-  backdrop-filter: blur(26px);
-  -webkit-backdrop-filter: blur(26px);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  border-radius: var(--radius-lg);
-  padding: 20px 28px;
+/* Minimal Corner Controls for Hero Video */
+.hero-corner-controls {
+  position: absolute;
+  bottom: 24px;
+  right: 28px;
+  z-index: 20;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(245, 158, 11, 0.16);
-  animation: floatSlow 6s ease-in-out infinite alternate;
+  gap: 12px;
 }
 
-@keyframes floatSlow {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-4px); }
+.btn-corner-media {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(13, 20, 36, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-corner-media:hover {
+  background: rgba(37, 99, 235, 0.85);
+  border-color: #3b82f6;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
+}
+
+.btn-corner-media.active-audio {
+  background: rgba(239, 68, 68, 0.85);
+  border-color: #ef4444;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.5);
 }
 
 .bar-brand-group {
