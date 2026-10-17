@@ -44,14 +44,13 @@ export default function BeforeAfterSlider() {
   };
 
   return (
-    <section className="section before-after-section" id="restoration">
+    <section className="section" id="restoration">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Interactive Paint Restoration</span>
+          <span className="section-tag">Interactive Showcase</span>
           <h2 className="section-title">Witness The Transformation</h2>
           <p className="section-desc">
-            Drag the interactive slider below to witness how our 3-stage compound paint correction and 9H nano-ceramic coating 
-            eliminates deep swirl marks, hazing, and oxidation to reveal deep liquid reflections.
+            Drag the interactive slider below to see how our 9H ceramic coating and multi-stage paint restoration eliminates deep swirl marks and creates a flawless liquid mirror reflection.
           </p>
         </div>
 
@@ -66,60 +65,35 @@ export default function BeforeAfterSlider() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {/* After Image: Ceramic Coating Liquid Gloss */}
+          {/* After Image */}
           <div className="ba-image-wrapper">
             <img 
-              src="/images/ceramic_polish_real.jpg" 
-              alt="After 9H Ceramic Coating Mirror Gloss" 
+              src="/images/detailing.jpg" 
+              alt="After Ceramic Coating Deep Mirror Gloss" 
               className="ba-image-after" 
             />
-            <span className="ba-label-after">
-              <i className="fa-solid fa-sparkles"></i> 9H Ceramic Mirror Finish (After)
-            </span>
+            <span className="ba-label-after">9H Ceramic Mirror Finish</span>
           </div>
 
-          {/* Before Image with dynamic clip container */}
+          {/* Before Image with dynamic clip */}
           <div 
             className="ba-image-before-container"
             style={{ width: `${sliderPosition}%` }}
           >
             <img 
-              src="/images/ceramic_polish_real.jpg" 
-              alt="Before Restoration Swirled Paint" 
+              src="/images/detailing.jpg" 
+              alt="Before Restoration Faded Paint" 
               className="ba-image-before" 
             />
-            <span className="ba-label-before">
-              <i className="fa-solid fa-cloud"></i> Swirled & Oxidized Paint (Before)
-            </span>
+            <span className="ba-label-before">Before Restoration</span>
           </div>
 
-          {/* Center Draggable Handle */}
+          {/* Slider Handle */}
           <div 
             className="ba-handle"
             style={{ left: `${sliderPosition}%` }}
-            aria-label="Drag slider to compare before and after"
           >
-            <div className="ba-handle-line"></div>
-            <div className="ba-handle-button">
-              <i className="fa-solid fa-arrows-left-right"></i>
-            </div>
-            <div className="ba-handle-line"></div>
-          </div>
-        </div>
-
-        {/* Supporting micro-features under slider */}
-        <div className="ba-metrics-row">
-          <div className="ba-metric-item">
-            <i className="fa-solid fa-droplet"></i>
-            <span>110° Hydrophobic Water Beading</span>
-          </div>
-          <div className="ba-metric-item">
-            <i className="fa-solid fa-shield"></i>
-            <span>3-Year High-Gloss Warranty</span>
-          </div>
-          <div className="ba-metric-item">
-            <i className="fa-solid fa-sun"></i>
-            <span>UV & Chemical Acid Protection</span>
+            <i className="fa-solid fa-arrows-left-right"></i>
           </div>
         </div>
       </div>

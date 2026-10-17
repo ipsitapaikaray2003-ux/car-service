@@ -1,312 +1,239 @@
-import React, { useState, useMemo } from 'react';
-
-const SEGMENTS = [
-  { id: 'hatchback', name: 'Hatchback', example: 'Swift, i20, Tiago, Baleno', multiplier: 1.0 },
-  { id: 'sedan', name: 'Sedan', example: 'City, Verna, Dzire, Virtus', multiplier: 1.15 },
-  { id: 'suv', name: 'Compact / Mid SUV', example: 'Creta, Brezza, Nexon, Seltos', multiplier: 1.28 },
-  { id: 'premium', name: 'Large SUV / Luxury', example: 'Fortuner, XUV700, BMW, Audi', multiplier: 1.6 }
-];
-
-const SERVICE_CATALOG = [
-  { id: 'basic', name: 'Basic Interim Service (5K KM)', basePrice: 2199, desc: 'Synthetic oil drain, OEM oil filter, fluid top-up & pressure wash' },
-  { id: 'standard', name: 'Standard Periodic Care (10K KM)', basePrice: 3699, desc: '100% Fully synthetic oil, new air/oil filters, OBD-II scan, brake check' },
-  { id: 'comprehensive', name: 'Comprehensive 60-Point Renewal', basePrice: 5999, desc: 'Bumper-to-bumper deep mechanical renewal, spark plugs, fluids & 1-yr warranty' },
-  { id: 'paint-panel', name: 'German Heated Booth Panel Paint', basePrice: 2499, desc: 'Bumper or door panel dent removal, Standox 2K paint, baked at 65°C' },
-  { id: 'ceramic', name: '9H Ceramic Coating (3-Yr Shield)', basePrice: 9999, desc: '3-stage swirl correction, dual 9H nano-layer, extreme water beading' },
-  { id: 'ac-service', name: 'AC Climate Control & Gas Refill', basePrice: 1499, desc: 'R134a refrigerant recharge, condenser cleaning & ozone cabin treatment' }
-];
-
-const ADDONS = [
-  { id: 'alignment', name: '3D Laser Wheel Alignment & Balancing', price: 699 },
-  { id: 'steam-spa', name: 'Interior Steam Disinfection & Ozone Spa', price: 899 },
-  { id: 'engine-flush', name: 'Engine De-carbonizing & Flush Treatment', price: 999 }
-];
+import React, { useState } from 'react';
 
 export default function QuickEstimateSection({ onOpenBooking, onShowToast }) {
-  const [selectedSegment, setSelectedSegment] = useState('hatchback');
-  const [selectedService, setSelectedService] = useState('standard');
-  const [selectedAddons, setSelectedAddons] = useState(['alignment']);
-  const [customerPhone, setCustomerPhone] = useState('');
-  const [carModel, setCarModel] = useState('');
+  const [formData, setFormData] = useState({
+    brand: '',
+    model: '',
+    service: 'Standard Periodic Service',
+    phone: ''
+  });
 
-  // Calculate live price
-  const calculation = useMemo(() => {
-    const segmentObj = SEGMENTS.find(s => s.id === selectedSegment) || SEGMENTS[0];
-    const serviceObj = SERVICE_CATALOG.find(s => s.id === selectedService) || SERVICE_CATALOG[1];
-    
-    const servicePrice = Math.round(serviceObj.basePrice * segmentObj.multiplier);
-    const addonsTotal = selectedAddons.reduce((sum, addonId) => {
-      const addon = ADDONS.find(a => a.id === addonId);
-      return sum + (addon ? addon.price : 0);
-    }, 0);
-
-    const total = servicePrice + addonsTotal;
-    const dealerEstimatedPrice = Math.round(total * 1.55);
-    const savings = dealerEstimatedPrice - total;
-
-    return {
-      servicePrice,
-      addonsTotal,
-      total,
-      dealerEstimatedPrice,
-      savings,
-      serviceName: serviceObj.name,
-      segmentName: segmentObj.name
-    };
-  }, [selectedSegment, selectedService, selectedAddons]);
-
-  const toggleAddon = (addonId) => {
-    setSelectedAddons(prev => 
-      prev.includes(addonId) 
-        ? prev.filter(id => id !== addonId) 
-        : [...prev, addonId]
-    );
-  };
-
-  const handleBookWithCalculatedPrice = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!customerPhone.trim()) {
-      alert('Please enter your 10-digit mobile number.');
+    if (!formData.phone) {
+      alert('Please enter your phone number.');
       return;
     }
 
-    const addonsText = selectedAddons.length > 0 
-      ? selectedAddons.map(id => ADDONS.find(a => a.id === id)?.name).join(', ')
-      : 'None';
-
     const text = encodeURIComponent(
-      `*Instant Service Estimate Booking - Multi Brand Car Service Center*\n\n` +
-      `🚗 *Vehicle Segment:* ${calculation.segmentName} (${carModel || 'Model Not Specified'})\n` +
-      `🛠️ *Primary Service:* ${calculation.serviceName} (₹${calculation.servicePrice.toLocaleString('en-IN')})\n` +
-      `➕ *Selected Add-ons:* ${addonsText}\n` +
-      `💰 *Estimated Total:* ₹${calculation.total.toLocaleString('en-IN')}\n` +
-      `📉 *Dealership Savings:* ~₹${calculation.savings.toLocaleString('en-IN')} (Up to 40% Off)\n` +
-      `📞 *Customer Phone:* ${customerPhone}\n\n` +
-      `📍 *Workshop:* Village Rehta Mafi, Thana Dilari, Thakurdwara, Moradabad\n` +
-      `_Requested from 2026 Instant Pricing Engine_`
+      `*Quick Quote Request - Multi Brand Car Service Center*\n\n` +
+      `🚗 *Car Brand:* ${formData.brand || 'Multi-Brand'}\n` +
+      `🚘 *Model/Year:* ${formData.model || 'Standard Variant'}\n` +
+      `🛠️ *Requested Service:* ${formData.service}\n` +
+      `📞 *Customer Phone:* ${formData.phone}\n\n` +
+      `_Requested from Quick Booking Portal_`
     );
 
     if (onShowToast) {
-      onShowToast('Price Locked!', 'Redirecting to WhatsApp Service Advisor with your custom quote...');
+      onShowToast('Quote Request Received!', 'Connecting with Service Advisor on WhatsApp...');
     }
 
     setTimeout(() => {
       window.open(`https://wa.me/919012862412?text=${text}`, '_blank');
     }, 600);
+
+    setFormData({ brand: '', model: '', service: 'Standard Periodic Service', phone: '' });
   };
 
   return (
     <section className="section quick-estimate-section" id="quick-estimate">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">Instant Transparent Pricing</span>
-          <h2 className="section-title">Configure & Calculate Service Cost</h2>
+          <span className="section-tag">Instant Booking & Overview</span>
+          <h2 className="section-title">Multi Brand Car Service Center</h2>
           <p className="section-desc">
-            No hidden fees, no dealership markups. Select your vehicle type and service requirement below 
-            for instant transparent pricing with guaranteed 100% genuine OEM parts and warranty.
+            Precision engineering, computerized diagnostics, certified master mechanics, and German heated paint booth refinishing in Village Rehta Mafi, Dilari, Thakurdwara, Moradabad.
           </p>
         </div>
 
-        <div className="calc-engine-grid">
-          {/* Left Column: Workshop Value Bento & Guarantees */}
-          <div className="calc-info-bento">
-            <div className="calc-pill-badge">
-              <span className="pulse-dot"></span>
-              <span>100% Price Transparency • Moradabad Hub</span>
+        <div className="quick-estimate-grid">
+          {/* Left Column: Workshop Pillars & Features */}
+          <div className="quick-estimate-info">
+            <div className="badge-strip" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
+              <span className="badge-neon">
+                <i className="fa-solid fa-award"></i> Multi Brand Precision
+              </span>
+              <span className="badge-amber">
+                <i className="fa-solid fa-phone"></i> Hotline: 90128 62412
+              </span>
             </div>
 
-            <h3 className="calc-bento-title">Dealership Precision. Direct Fair Pricing.</h3>
-            <p className="calc-bento-sub">
-              Every job at Multi Brand Car Service Center is logged with computerized diagnostic verification. 
-              Enjoy free doorstep valet pickup across Thakurdwara, Dilari, and Moradabad.
+            <h3 style={{ fontSize: '1.8rem', color: 'var(--text-primary)', marginBottom: '14px', lineHeight: 1.25 }}>
+              Expert Attention Tailored to Every Make & Model
+            </h3>
+
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: 1.7, marginBottom: '24px' }}>
+              At Multi Brand Car Service Center, we treat every vehicle with dealership-grade precision without the dealership markup. From routine logbook servicing to complex transmission, suspension, and high-gloss ceramic restorations in Moradabad district.
             </p>
 
-            <div className="calc-trust-checklist">
-              <div className="calc-check-row">
-                <div className="calc-check-icon">
-                  <i className="fa-solid fa-truck-pickup"></i>
-                </div>
+            <div className="features-checklist">
+              <div className="hero-check-item">
+                <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong>Free Doorstep Pickup & Drop:</strong>
-                  <span>Safe insured valet transit from your home or office across Moradabad district.</span>
+                  <strong style={{ color: 'var(--text-primary)' }}>Free Doorstep Pickup & Drop:</strong> Available across Thakurdwara, Dilari, Rehta Mafi, Moradabad, Kashipur Road & nearby belts.
                 </div>
               </div>
-
-              <div className="calc-check-row">
-                <div className="calc-check-icon">
-                  <i className="fa-solid fa-shield-halved"></i>
-                </div>
+              <div className="hero-check-item">
+                <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong>6 Months / 10,000 KM Warranty:</strong>
-                  <span>Rock-solid warranty certificate covering all mechanical repairs and OEM components.</span>
+                  <strong style={{ color: 'var(--text-primary)' }}>6-Month / 10,000 KM Warranty:</strong> Genuine peace of mind on all mechanical repairs and spare parts.
                 </div>
               </div>
-
-              <div className="calc-check-row">
-                <div className="calc-check-icon">
-                  <i className="fa-solid fa-video"></i>
-                </div>
+              <div className="hero-check-item">
+                <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong>Live WhatsApp Video Approvals:</strong>
-                  <span>Before any extra bolt is touched, you receive HD video clips for your digital thumbs-up.</span>
+                  <strong style={{ color: 'var(--text-primary)' }}>100% Genuine OEM / OES Spares:</strong> Shell, Mobil 1, Bosch, Valeo, Brembo, and certified parts.
                 </div>
               </div>
-
-              <div className="calc-check-row">
-                <div className="calc-check-icon">
-                  <i className="fa-solid fa-certificate"></i>
-                </div>
+              <div className="hero-check-item">
+                <span className="hero-check-icon"><i className="fa-solid fa-check"></i></span>
                 <div>
-                  <strong>German Paint Booth & Standox Refinishing:</strong>
-                  <span>Dust-free pressurized curing at 65°C for lifetime gloss and zero color mismatch.</span>
+                  <strong style={{ color: 'var(--text-primary)' }}>Live WhatsApp Video Reports:</strong> Complete digital transparency before any parts are replaced.
                 </div>
               </div>
             </div>
 
-            {/* Direct Helpline card */}
-            <div className="calc-hotline-card">
-              <i className="fa-solid fa-headset calc-hotline-icon"></i>
-              <div>
-                <span className="calc-hotline-label">Prefer to speak directly with our Master Mechanic?</span>
-                <a href="tel:9012862412" className="calc-hotline-number">Call Hotline: 90128 62412</a>
-              </div>
+            <div style={{ display: 'flex', gap: '16px', marginTop: '30px', flexWrap: 'wrap' }}>
+              <button 
+                type="button" 
+                className="btn btn-primary btn-lg"
+                onClick={() => onOpenBooking('Standard Service')}
+              >
+                <i className="fa-regular fa-calendar-check"></i>
+                <span>Schedule Service Now</span>
+              </button>
+              <a href="tel:9012862412" className="btn btn-outline btn-lg" style={{ fontFamily: 'var(--font-mono)' }}>
+                <i className="fa-solid fa-phone"></i>
+                <span>Call 90128 62412</span>
+              </a>
             </div>
           </div>
 
-          {/* Right Column: Dynamic Interactive Pricing Calculator */}
-          <div className="calculator-widget-card">
-            <div className="calculator-card-header">
-              <div className="calc-header-title">
-                <i className="fa-solid fa-calculator" style={{ color: 'var(--accent-red)' }}></i>
-                <span>Instant Service Calculator</span>
+          {/* Right Column: Instant Quote Form */}
+          <div className="quick-estimate-card">
+            <div className="widget-header">
+              <div className="widget-title">
+                <span>Fast Service Estimate</span>
+                <span className="badge-green">Instant WhatsApp Quote</span>
               </div>
-              <span className="calc-live-pill">Live 2026 Rates</span>
+              <p className="widget-subtitle">Connect with our master mechanic for your specific car in seconds</p>
             </div>
 
-            <form onSubmit={handleBookWithCalculatedPrice} className="calc-form">
-              {/* Step 1: Vehicle Segment */}
-              <div className="calc-step-group">
-                <label className="calc-step-label">
-                  <span className="step-circle">1</span>
-                  <span>Select Vehicle Segment</span>
-                </label>
-                <div className="calc-segment-pills">
-                  {SEGMENTS.map(seg => (
-                    <button
-                      key={seg.id}
-                      type="button"
-                      className={`segment-btn ${selectedSegment === seg.id ? 'active' : ''}`}
-                      onClick={() => setSelectedSegment(seg.id)}
-                    >
-                      <span className="segment-btn-name">{seg.name}</span>
-                      <span className="segment-btn-ex">{seg.example}</span>
-                    </button>
-                  ))}
-                </div>
+            <form className="widget-form" onSubmit={handleFormSubmit}>
+              <div className="form-group">
+                <label htmlFor="qe-brand" className="form-label">Car Manufacturer</label>
+                <select 
+                  id="qe-brand" 
+                  className="form-select" 
+                  value={formData.brand}
+                  onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+                  required
+                >
+                  <option value="" disabled>Select Your Car Brand</option>
+                  <option value="Maruti Suzuki">Maruti Suzuki</option>
+                  <option value="Hyundai">Hyundai</option>
+                  <option value="Tata Motors">Tata Motors</option>
+                  <option value="Mahindra">Mahindra</option>
+                  <option value="Honda">Honda</option>
+                  <option value="Toyota">Toyota</option>
+                  <option value="Volkswagen">Volkswagen</option>
+                  <option value="Skoda">Skoda</option>
+                  <option value="Kia">Kia</option>
+                  <option value="MG Motors">MG Motors</option>
+                  <option value="BMW">BMW</option>
+                  <option value="Mercedes-Benz">Mercedes-Benz</option>
+                  <option value="Audi">Audi</option>
+                  <option value="Other">Other Multi-Brand Car</option>
+                </select>
               </div>
 
-              {/* Step 2: Service Selection */}
-              <div className="calc-step-group">
-                <label className="calc-step-label">
-                  <span className="step-circle">2</span>
-                  <span>Select Primary Service</span>
-                </label>
-                <div className="calc-service-list">
-                  {SERVICE_CATALOG.map(serv => (
-                    <div 
-                      key={serv.id}
-                      className={`calc-service-option ${selectedService === serv.id ? 'active' : ''}`}
-                      onClick={() => setSelectedService(serv.id)}
-                    >
-                      <div className="calc-radio-circle">
-                        {selectedService === serv.id && <span className="calc-radio-dot"></span>}
-                      </div>
-                      <div className="calc-serv-details">
-                        <div className="calc-serv-title-row">
-                          <span className="calc-serv-name">{serv.name}</span>
-                          <span className="calc-serv-price">
-                            ₹{Math.round(serv.basePrice * (SEGMENTS.find(s => s.id === selectedSegment)?.multiplier || 1)).toLocaleString('en-IN')}
-                          </span>
-                        </div>
-                        <p className="calc-serv-desc">{serv.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <div className="form-group">
+                <label htmlFor="qe-model" className="form-label">Car Model & Year</label>
+                <input 
+                  type="text" 
+                  id="qe-model" 
+                  className="form-input" 
+                  placeholder="e.g. Swift VXI or Creta Diesel 2021"
+                  value={formData.model}
+                  onChange={(e) => setFormData({ ...formData, model: e.target.value })}
+                  required 
+                />
               </div>
 
-              {/* Step 3: Optional Add-ons */}
-              <div className="calc-step-group">
-                <label className="calc-step-label">
-                  <span className="step-circle">3</span>
-                  <span>Recommended Add-ons (Optional)</span>
-                </label>
-                <div className="calc-addons-grid">
-                  {ADDONS.map(addon => {
-                    const isChecked = selectedAddons.includes(addon.id);
-                    return (
-                      <div 
-                        key={addon.id} 
-                        className={`calc-addon-pill ${isChecked ? 'active' : ''}`}
-                        onClick={() => toggleAddon(addon.id)}
-                      >
-                        <i className={`fa-solid ${isChecked ? 'fa-square-check' : 'fa-square'} addon-checkbox`}></i>
-                        <span className="addon-title">{addon.name}</span>
-                        <span className="addon-cost">+₹{addon.price}</span>
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="form-group">
+                <label htmlFor="qe-service" className="form-label">Desired Service</label>
+                <select 
+                  id="qe-service" 
+                  className="form-select"
+                  value={formData.service}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  required
+                >
+                  <option value="Standard Periodic Service">Standard Periodic Service (Recommended)</option>
+                  <option value="Basic Service">Basic Routine Maintenance</option>
+                  <option value="Comprehensive 60-Point Service">Comprehensive 60-Point Service</option>
+                  <option value="Ceramic Coating / Detailing">9H Ceramic Coating & Detailing</option>
+                  <option value="Bumper / Panel Dent & Paint">Denting & Painting Booth</option>
+                  <option value="AC Cooling & Gas Refill">AC Cooling & Gas Overhaul</option>
+                  <option value="Suspension Noise Inspection">Suspension & Steering Overhaul</option>
+                  <option value="Clutch / Brake Replacement">Brake & Clutch Repair</option>
+                </select>
               </div>
 
-              {/* Car Model & Phone Inputs */}
-              <div className="calc-inputs-row">
-                <div className="calc-input-wrap">
-                  <label className="calc-input-label" htmlFor="calc-car-model">Car Model & Year</label>
-                  <input 
-                    type="text" 
-                    id="calc-car-model"
-                    className="calc-input" 
-                    placeholder="e.g. Swift 2021 / Creta Diesel" 
-                    value={carModel}
-                    onChange={(e) => setCarModel(e.target.value)}
-                  />
-                </div>
-                <div className="calc-input-wrap">
-                  <label className="calc-input-label" htmlFor="calc-customer-phone">Mobile Number *</label>
-                  <input 
-                    type="tel" 
-                    id="calc-customer-phone"
-                    className="calc-input" 
-                    placeholder="Enter 10-digit number" 
-                    value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    required
-                  />
-                </div>
+              <div className="form-group">
+                <label htmlFor="qe-phone" className="form-label">Your Phone Number</label>
+                <input 
+                  type="tel" 
+                  id="qe-phone" 
+                  className="form-input" 
+                  placeholder="Enter 10-digit mobile number"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  required 
+                  pattern="[0-9]{10}" 
+                />
               </div>
 
-              {/* Live Cost Summary Bar */}
-              <div className="calc-total-bar">
-                <div className="calc-total-left">
-                  <span className="calc-total-title">Estimated Service Cost</span>
-                  <div className="calc-total-amount-row">
-                    <span className="calc-currency">₹</span>
-                    <span className="calc-amount">{calculation.total.toLocaleString('en-IN')}</span>
-                    <span className="calc-gst-note">Inclusive of fluids & taxes</span>
-                  </div>
-                  <div className="calc-savings-badge">
-                    <i className="fa-solid fa-arrow-trend-down"></i>
-                    <span>Dealership price: ~₹{calculation.dealerEstimatedPrice.toLocaleString('en-IN')} (You save ~₹{calculation.savings.toLocaleString('en-IN')})</span>
-                  </div>
-                </div>
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px' }}>
+                <i className="fa-solid fa-bolt"></i>
+                <span>Get Instant WhatsApp Estimate</span>
+              </button>
 
-                <button type="submit" className="btn btn-primary calc-submit-btn">
-                  <i className="fa-brands fa-whatsapp"></i>
-                  <span>Lock Price & Book via WhatsApp</span>
-                </button>
+              <div className="widget-perks-row">
+                <div className="widget-perk-item">
+                  <i className="fa-solid fa-shield-halved" style={{ color: 'var(--neon-cyan)' }}></i>
+                  <span>Zero Hidden Costs</span>
+                </div>
+                <div className="widget-perk-item">
+                  <i className="fa-solid fa-clock-rotate-left" style={{ color: 'var(--amber-gold)' }}></i>
+                  <span>Same Day Delivery</span>
+                </div>
+                <div className="widget-perk-item">
+                  <i className="fa-solid fa-truck" style={{ color: 'var(--success-green)' }}></i>
+                  <span>Free Pickup</span>
+                </div>
               </div>
             </form>
+          </div>
+        </div>
+
+        {/* Stats Counter Strip */}
+        <div className="hero-stats-strip" style={{ marginTop: '50px' }}>
+          <div className="stat-item">
+            <div className="stat-number">10,000<span>+</span></div>
+            <div className="stat-label">Cars Serviced in Moradabad Region</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">100<span>%</span></div>
+            <div className="stat-label">Genuine OEM / OES Spares</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">1<span></span></div>
+            <div className="stat-label">Hi-Tech Multi-Brand Facility</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">4.9<span>★</span></div>
+            <div className="stat-label">Customer Satisfaction Rating</div>
           </div>
         </div>
       </div>

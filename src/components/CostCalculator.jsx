@@ -205,7 +205,7 @@ export default function CostCalculator({ onOpenBookingWithQuote }) {
                 </div>
                 <div className="summary-line">
                   <span>Doorstep Pickup & Drop:</span>
-                  <span className="summary-line-val" style={{ color: 'var(--success-green)' }}>FREE in Moradabad & Thakurdwara</span>
+                  <span className="summary-line-val" style={{ color: 'var(--success-green)' }}>FREE in Bangalore</span>
                 </div>
               </div>
             </div>

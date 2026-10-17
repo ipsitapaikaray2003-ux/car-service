@@ -95,7 +95,7 @@ export default function App() {
       {/* 4-Step Process */}
       <Workflow />
 
-      {/* Workshop Location & Interactive Map (Village Rehta Mafi, Moradabad) */}
+      {/* 3 Bangalore Locations */}
       <Locations />
 
       {/* Client Testimonials */}
